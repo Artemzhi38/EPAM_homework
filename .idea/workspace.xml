@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1f3f322-d45c-429a-bc10-4bf32d749d5f" name="Default Changelist" comment="first commit for homework1">
+    <list default="true" id="c1f3f322-d45c-429a-bc10-4bf32d749d5f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <list id="756ab8f2-9c69-4348-af63-ed5e16356348" name="first commit for homework2" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homeworks/homework1/task04.py" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/homework1/task04.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_homework1/test_task03.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_homework1/test_task03.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_homework1/test_task04.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_homework1/test_task04.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_homework1/testfiles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_homework1/test_files/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_homework1/testfiles/testfile1_task03.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_homework1/test_files/testfile1_task03.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_homework1/testfiles/testfile2_task03.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_homework1/test_files/testfile2_task03.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +48,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/test_homework2/testfiles" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
@@ -187,11 +184,27 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c1f3f322-d45c-429a-bc10-4bf32d749d5f" name="Default Changelist" comment="" />
+      <changelist id="756ab8f2-9c69-4348-af63-ed5e16356348" name="first commit for homework2" comment="" />
       <created>1630221039152</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1630221039152</updated>
     </task>
+    <task id="LOCAL-00001" summary="first commit for homework2">
+      <created>1631034746550</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1631034746550</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first commit for homework2">
+      <created>1631034789543</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1631034789543</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
