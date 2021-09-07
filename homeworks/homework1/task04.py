@@ -11,19 +11,25 @@ from typing import List
 def check_sum_of_four(a: List[int], b: List[int],
                       c: List[int], d: List[int]) -> int:
     count = 0
-    a.sort()
-    b.sort()
-    c.sort()
-    d.sort()
     for i in range(len(a)):
-        if (b[0]+c[0]+d[0]) <= -(a[i]) <= (b[-1]+c[-1]+d[-1]):
-            for j in range(len(b)):
-                if (c[0]+d[0]) <= -(a[i]+b[j]) <= (c[-1]+d[-1]):
-                    for k in range(len(c)):
-                        if (d[0]) <= -(a[i]+b[j]+c[k]) <= (d[-1]):
-                            for m in range(len(d)):
-                                if a[i]+b[j]+c[k]+d[m] == 0:
-                                    count += 1
-                                elif a[i]+b[j]+c[k]+d[m] > 0:
-                                    break
+        for j in range(len(b)):
+            for k in range(len(c)):
+                for m in range(len(d)):
+                    if a[i]+b[j]+c[k]+d[m] == 0:
+                        count += 1
+    return count
+
+
+def opt_check_sum_of_four(a: List[int], b: List[int], c: List[int],
+                          d: List[int]) -> int:
+    length = len(a)
+    count = 0
+    ab = []
+    cd = []
+    for i in range(length):
+        for j in range(length):
+            ab.append(a[i]+b[j])
+            cd.append(c[i]+d[j])
+    for i in ab:
+        count += cd.count(-1*i)
     return count
