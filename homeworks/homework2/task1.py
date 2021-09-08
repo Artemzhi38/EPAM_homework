@@ -14,7 +14,7 @@ from unicodedata import category
 def get_longest_diverse_words(file_path: str) -> List[str]:
     result = ['', '', '', '', '', '', '', '', '', '']
     with open(file_path,
-              mode='r', encoding='utf_8') as text:
+              mode='r', encoding='raw_unicode_escape') as text:
         for line in text:
             for word in re.sub(r'\W', ' ', line).split():
                 if word not in result:
@@ -34,7 +34,7 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
 def get_rarest_char(file_path: str) -> str:
     counter = {}
     with open(file_path,
-              mode='r', encoding='utf_8') as text:
+              mode='r', encoding='raw_unicode_escape') as text:
         first = text.readline()[0]
         for line in text:
             for symbol in line:
@@ -54,7 +54,7 @@ def get_rarest_char(file_path: str) -> str:
 def count_punctuation_chars(file_path: str) -> int:
     counter = 0
     with open(file_path,
-              mode='r', encoding='utf_8') as text:
+              mode='r', encoding='raw_unicode_escape') as text:
         for line in text:
             for symbol in line:
                 if category(symbol)[0] in ['p', 'P']:
@@ -65,7 +65,7 @@ def count_punctuation_chars(file_path: str) -> int:
 def count_non_ascii_chars(file_path: str) -> int:
     counter = 0
     with open(file_path,
-              mode='r', encoding='utf_8') as text:
+              mode='r', encoding='raw_unicode_escape') as text:
         for line in text:
             if not line.isascii():
                 for symbol in line:
@@ -77,7 +77,7 @@ def count_non_ascii_chars(file_path: str) -> int:
 def get_most_common_non_ascii_char(file_path: str) -> str:
     counter = {}
     with open(file_path,
-              mode='r', encoding='utf_8') as text:
+              mode='r', encoding='raw_unicode_escape') as text:
         for line in text:
             if not line.isascii():
                 for symbol in line:
