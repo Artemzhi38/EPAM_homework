@@ -1,6 +1,7 @@
 import urllib.request
 
 import pytest
+
 from homeworks.homework4.task2 import count_dots_on_i
 
 
