@@ -35,7 +35,6 @@ def get_rarest_char(file_path: str) -> str:
     counter = {}
     with open(file_path,
               mode='r', encoding='raw_unicode_escape') as text:
-        first = text.readline()[0]
         for line in text:
             for symbol in line:
                 if symbol in counter:
