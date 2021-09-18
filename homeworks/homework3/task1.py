@@ -32,7 +32,7 @@ def cache(times):
         cache_dict = {}
 
         def return_func(*args, **kwargs):
-            if (*args, *kwargs) in cache_dict.keys():
+            if (*args, *kwargs) in cache_dict:
                 if cache_dict[(*args, *kwargs)][0] > 0:
                     cache_dict[(*args, *kwargs)][0] -= 1
                     return cache_dict[(*args, *kwargs)][1]

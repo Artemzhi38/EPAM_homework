@@ -6,7 +6,7 @@ import queue
 import random
 import struct
 import time
-from multiprocessing import Process, Queue
+from multiprocessing import Pool, Process, Queue
 
 
 def slow_calculate(value):
@@ -56,3 +56,8 @@ def multi_proc_count():
         result += counted_values.get()
 
     return result
+
+
+def pool_count(n):
+    p = Pool(32)
+    return sum(p.map(slow_calculate, range(n)))

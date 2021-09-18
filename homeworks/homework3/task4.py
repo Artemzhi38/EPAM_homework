@@ -12,18 +12,9 @@ in functionaly style:
  - use anonymous functions (or use function as argument)
  - do not use loops, preferably using list comprehensions
 """
-from functools import reduce
 
 
 def is_armstrong(number: int) -> bool:
-    list_of_digits = [int(digit) for digit in str(number)]
-    number_of_digits = len(list_of_digits)
-    list_of_powered_digits = [digit**number_of_digits for
-                              digit in list_of_digits]
-    result = reduce((lambda x, y: x+y), list_of_powered_digits)
-    return bool(result == number)
-
-
-print(is_armstrong(10))
-assert is_armstrong(153) is True, 'Is Armstrong number'
-assert is_armstrong(10) is False, 'Is not Armstrong number'
+    return bool(sum([int(digit)**len(str(number)) for
+                     digit in str(number)])
+                == number)
