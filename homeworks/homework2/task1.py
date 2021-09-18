@@ -38,17 +38,12 @@ def get_rarest_char(file_path: str) -> str:
         first = text.readline()[0]
         for line in text:
             for symbol in line:
-                if symbol in counter.keys():
+                if symbol in counter:
                     counter[symbol] += 1
                 else:
                     counter[symbol] = 1
-    rarest_count = counter[first]
-    rarest = first
-    for symbol in counter:
-        if counter[symbol] < rarest_count:
-            rarest_count = counter[symbol]
-            rarest = symbol
-    return rarest
+    sorted_chars = sorted(counter, key=lambda x: counter[x])
+    return sorted_chars[0]
 
 
 def count_punctuation_chars(file_path: str) -> int:
@@ -84,7 +79,7 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
                     if not symbol.isascii():
                         if counter == {}:
                             first = symbol
-                        if symbol in counter.keys():
+                        if symbol in counter:
                             counter[symbol] += 1
                         else:
                             counter[symbol] = 1
