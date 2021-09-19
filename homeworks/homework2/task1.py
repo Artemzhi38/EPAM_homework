@@ -12,23 +12,16 @@ from unicodedata import category
 
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
-    result = ['', '', '', '', '', '', '', '', '', '']
+    words = []
     with open(file_path,
               mode='r', encoding='raw_unicode_escape') as text:
         for line in text:
             for word in re.sub(r'\W', ' ', line).split():
-                if word not in result:
-                    for element in result:
-                        if len(element) < len(word):
-                            result.remove(element)
-                            result.append(word)
-                            break
-                        if len(element) == len(word) and \
-                                len(set(element)) < len(set(word)):
-                            result.remove(element)
-                            result.append(word)
-                            break
-    return result
+                if word not in words:
+                    words.append(word)
+    result = sorted(words, reverse=True, key=lambda element:
+                    (len(set(element)), len(element)))
+    return result[:10]
 
 
 def get_rarest_char(file_path: str) -> str:
@@ -76,16 +69,10 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
             if not line.isascii():
                 for symbol in line:
                     if not symbol.isascii():
-                        if counter == {}:
-                            first = symbol
                         if symbol in counter:
                             counter[symbol] += 1
                         else:
                             counter[symbol] = 1
-    most_common_count = counter[first]
-    most_common = first
-    for symbol in counter:
-        if counter[symbol] > most_common_count:
-            most_common_count = counter[symbol]
-            most_common = symbol
-    return most_common
+    sorted_chars = sorted(counter, key=lambda x: counter[x],
+                          reverse=True)
+    return sorted_chars[0]

@@ -9,13 +9,14 @@
 
 # def test_get_longest_diverse_words_func():
 #     """Testing that function get_longest_diverse_words gives right result"""
-#    assert get_longest_diverse_words('C:\\Users\\auto\\Desktop\\'
+#     assert get_longest_diverse_words('C:\\Users\\auto\\Desktop\\'
 #                                      'Programming\\Python\\'
 #                                      'EPAM_training\\EPAM_homework'
 #                                      '\\tests\\test_homework2\\test_files\\'
 #                                      'testfile1_task1.txt') == \
-#            ['hijklmnoа', 'hijklmno1', 'stuvwxyz1', 'hijklmno2', 'stuvwxyz2',
-#             'hijklmno3', 'stuvwxyz3', 'defgб', 'hijklmnoб', 'stuvwxyzб']
+#            ['hijklmno11', 'stuvwxyz11', 'hijklmno22', 'stuvwxyz22',
+#            'hijklmno33','stuvwxyz33', 'hijklmnoÐ', 'hijklmno1',
+#            'stuvwxyz1', 'hijklmno2']
 
 
 # def test_get_rarest_char_func():
