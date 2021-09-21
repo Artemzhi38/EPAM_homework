@@ -32,32 +32,6 @@ def do_count(values_to_count, counted_values):
     return True
 
 
-def multi_proc_count():
-    values = 501
-    number_of_processes = 64
-    values_to_count = Queue()
-    counted_values = Queue()
-    proc_list = []
-    result = 0
-
-    for i in range(values):
-        values_to_count.put(str(i))
-
-    for i in range(number_of_processes):
-        proc = Process(target=do_count, args=(values_to_count,
-                                              counted_values))
-        proc_list.append(proc)
-        proc.start()
-
-    for proc in proc_list:
-        proc.join()
-
-    while not counted_values.empty():
-        result += counted_values.get()
-
-    return result
-
-
 def pool_count(n):
     p = Pool(32)
     return sum(p.map(slow_calculate, range(n)))

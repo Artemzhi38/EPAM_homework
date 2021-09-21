@@ -15,6 +15,5 @@ in functionaly style:
 
 
 def is_armstrong(number: int) -> bool:
-    return bool(sum([int(digit)**len(str(number)) for
-                     digit in str(number)])
-                == number)
+    return sum([int(digit)**len(str(number)) for
+                digit in str(number)]) == number
