@@ -16,8 +16,4 @@ from typing import Any, List
 
 
 def combinations(*args: List[Any]) -> List[List]:
-    result = []
-    combs_in_tuples = list(product(*args))
-    for i in combs_in_tuples:
-        result.append(list(i))
-    return result
+    return list(map(lambda x: list(x), list(product(*args))))
