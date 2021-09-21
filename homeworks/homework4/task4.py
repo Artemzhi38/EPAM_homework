@@ -18,39 +18,38 @@ You will learn:
 * https://en.wikipedia.org/wiki/Fizz_buzz
 ** Энциклопедия профессора Фортрана page 14, 15,
 "Робот Фортран, чисть картошку!"
-
-Doctests for fizzbuzz function:
-#to run them use 'pytest --doctest-modules' command
-
-# Positive tests
-# Testing that function works correctly with positive n
->>> fizzbuzz(5)
-['1', '2', 'fizz', '4', 'buzz']
-
-# Testing that function works correctly with n = 15
->>> fizzbuzz(15)[-1]
-'fizz buzz'
-
-# Testing that function will give an empty list as the result with n = 0
->>> fizzbuzz(0)
-[]
-
-# Testing that function will give an empty list as the result with n < 0
->>> fizzbuzz(-5)
-[]
-
-# Negative test
-# Testing that function will raise TypeError if n is not int
->>> fizzbuzz('fifteen')
-Traceback (most recent call last):
-    ...
-TypeError: ...
-
 """
 from typing import List
 
 
 def fizzbuzz(n: int) -> List[str]:
+    """Doctests for fizzbuzz function:
+    # to run them use 'pytest --doctest-modules' command
+
+    # Positive tests
+    # Testing that function works correctly with positive n
+    >>> fizzbuzz(5)
+    ['1', '2', 'fizz', '4', 'buzz']
+
+    # Testing that function works correctly with n = 15
+    >>> fizzbuzz(15)[-1]
+    'fizz buzz'
+
+    # Testing that function will give an empty list as the result with n = 0
+    >>> fizzbuzz(0)
+    []
+
+    # Testing that function will give an empty list as the result with n < 0
+    >>> fizzbuzz(-5)
+    []
+
+    # Negative test
+    # Testing that function will raise TypeError if n is not int
+    >>> fizzbuzz('fifteen')
+    Traceback (most recent call last):
+        ...
+    TypeError: ...
+    """
     result = []
     for i in range(1, n+1):
         if int(i) % 15 == 0:

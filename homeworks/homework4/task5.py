@@ -14,34 +14,6 @@ Definition of done:
 
 * https://en.wikipedia.org/wiki/Fizz_buzz
 ** https://www.youtube.com/watch?v=NSzsYWckGd4
-
-Doctests for fizzbuzz function:
-#to run them use 'pytest --doctest-modules' command
-
-# Positive tests
-# Testing that function works correctly with positive n
->>> list(fizzbuzz(5))
-['1', '2', 'fizz', '4', 'buzz']
-
-# Testing that function works correctly with n = 15
->>> list(fizzbuzz(15))[-1]
-'fizz buzz'
-
-# Testing that function will give an empty list as the result with n = 0
->>> list(fizzbuzz(0))
-[]
-
-# Testing that function will give an empty list as the result with n < 0
->>> list(fizzbuzz(-5))
-[]
-
-# Negative test
-# Testing that function will raise TypeError if n is not int
->>> list(fizzbuzz('fifteen'))
-Traceback (most recent call last):
-    ...
-TypeError: ...
-
 """
 # import itertools
 # from typing import List, Generator

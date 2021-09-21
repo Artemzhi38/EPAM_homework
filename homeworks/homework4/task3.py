@@ -29,4 +29,4 @@ def my_precious_logger(text: str):
         sys.stderr.write(text)
     else:
         sys.stdout.write(text)
-    pass
+
