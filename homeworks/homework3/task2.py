@@ -6,7 +6,7 @@ import queue
 import random
 import struct
 import time
-from multiprocessing import Pool, Process, Queue
+from multiprocessing import Pool
 
 
 def slow_calculate(value):
