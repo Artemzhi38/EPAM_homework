@@ -25,11 +25,10 @@ class Homework:
         is_active - проверяет не истекло ли время на выполнение задания,
         возвращает boolean
     """
-    def __init__(self, text: str, deadline: datetime.timedelta,
-                 created=datetime.datetime.now()):
+    def __init__(self, text: str, deadline: datetime.timedelta,):
         self.text = text
         self.deadline = deadline
-        self.created = created
+        self.created = datetime.datetime.now()
 
     def is_active(self) -> bool:
         return datetime.datetime.now() - self.created < self.deadline
@@ -68,7 +67,7 @@ class Teacher:
 
     @staticmethod
     def create_homework(text: str, days: int) -> Homework:
-        return Homework(text, datetime.timedelta(days=float(days)))
+        return Homework(text, datetime.timedelta(days=days))
 
 
 if __name__ == '__main__':

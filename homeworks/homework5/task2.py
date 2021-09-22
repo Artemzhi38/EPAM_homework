@@ -14,59 +14,19 @@ print(custom_sum.__doc__)  # 'This function can sum any objects
 print(custom_sum.__name__)  # 'custom_sum'
 print(custom_sum.__original_func)  # <function custom_sum at
 <some_id>>
-
-Doctests for custom_wraps decorator:
-#to run them use 'pytest --doctest-modules' command
-
-# Positive tests
-
-# Testing that decorated original function works correctly with
-# two arguments and give the result two times (first - for 'print'
-# inside decorator and second - for 'return' in original function)
->>> custom_sum([1, 2, 3], [4, 5])
-[1, 2, 3, 4, 5]
-[1, 2, 3, 4, 5]
-
-# Testing that decorated original function works correctly with
-# four arguments
->>> custom_sum(1, 2, 3, 4)
-10
-10
-
-# Testing that decorated original function docstring is accessible
-# with 'function.__doc__' command
->>> custom_sum.__doc__
-'This function can sum any objects which have __add___'
-
-# Testing that decorated original function name is accessible with
-# 'function.__name__' command
->>> custom_sum.__name__
-'custom_sum'
-
-# Testing that original function is accessible with
-# 'function.__original_func' command
->>> custom_sum.__original_func
-<function custom_sum at ...>
-
-# Testing that original function accessed with
-# 'function.__original_func' command does not print
-# any output(gives result only once)
->>> custom_sum.__original_func(1, 2, 3, 4)
-10
-
 """
 import functools
 
 
 def custom_wraps(orig_func):
 
-    def custom_update_wrapper(wrapper, wrapped):
-        wrapper.__name__ = wrapped.__name__
-        wrapper.__doc__ = wrapped.__doc__
-        wrapper.__original_func = wrapped
+    def custom_update_wrapper(wrapper):
+        wrapper.__name__ = orig_func.__name__
+        wrapper.__doc__ = orig_func.__doc__
+        wrapper.__original_func = orig_func
         return wrapper
 
-    return functools.partial(custom_update_wrapper, wrapped=orig_func)
+    return custom_update_wrapper
 
 
 def print_result(func):
