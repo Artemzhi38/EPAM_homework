@@ -1,8 +1,8 @@
 import datetime
-
 from collections import defaultdict
 
 import pytest
+
 from homeworks.homework6.task2 import (DeadlineError, Homework, HomeworkResult,
                                        Student, Teacher)
 
