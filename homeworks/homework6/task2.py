@@ -63,7 +63,14 @@ class Homework:
         return datetime.datetime.now() - self.created < self.deadline
 
 
-class Student:
+class Person:
+
+    def __init__(self, last_name: str, first_name: str):
+        self.last_name = last_name
+        self.first_name = first_name
+
+
+class Student(Person):
     """Атрибуты:
         last_name
         first_name
@@ -71,10 +78,6 @@ class Student:
         do_homework - принимает объект Homework и возвращает его же, если
         задание уже просрочено, то печатет 'You are late' и возвращает None
     """
-    def __init__(self, last_name: str, first_name: str):
-        self.last_name = last_name
-        self.first_name = first_name
-
     def do_homework(self, homework: Homework, solution: str):
         if homework.is_active():
             return HomeworkResult(homework, solution, self)
@@ -103,7 +106,7 @@ class HomeworkResult:
             self.created = datetime.datetime.now()
 
 
-class Teacher(Student):
+class Teacher(Person):
     """Атрибуты:
         last_name
         first_name
@@ -130,7 +133,7 @@ class Teacher(Student):
 
     @classmethod
     def reset_results(cls, homework=None):
-        if homework is None:
+        if not homework:
             cls.homework_done = defaultdict(set)
         else:
             cls.homework_done[homework] = set()
