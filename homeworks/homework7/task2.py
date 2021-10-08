@@ -13,6 +13,8 @@ Examples:
     Output: False
     Explanation: s becomes "c" while t becomes "b".
 """
+import re
+
 from collections import defaultdict
 
 
@@ -27,5 +29,5 @@ def backspace_compare(first: str, second: str):
     return result[first] == result[second]
 
 
-if __name__ == '__main__':
-    print(backspace_compare("####", "#####"))
+'''def backspace_compare_regex(first: str, second: str):
+    return re.sub('#', '\b', first) == re.sub('#', '\b', second)'''
