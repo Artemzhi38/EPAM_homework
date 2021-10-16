@@ -1,7 +1,6 @@
 import os.path
 
 import pytest
-
 from homeworks.homework8.task1 import KeyValueStorage
 
 
