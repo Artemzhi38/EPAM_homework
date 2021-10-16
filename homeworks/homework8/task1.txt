@@ -1,5 +1,4 @@
-name=kek
-last_name=top
-power=9001
-song=shadilay
-keys=test
+__name__=attr1
+__dict__=attr2
+__doc__=attr3
+__module__=attr4

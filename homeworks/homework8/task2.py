@@ -30,25 +30,24 @@ import sqlite3
 
 
 class TableData:
-    
+
     def __init__(self, database_name: str, table_name: str):
         self.database_name = database_name
         self.table_name = table_name
 
     def __len__(self):
         len_count = 0
-        for element in self.__iter__():
+        for i in self.__iter__():
             len_count += 1
         return len_count
 
     def __iter__(self):
-        conn = sqlite3.connect(f'{self.database_name}')
-        conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-        cursor.execute(f'SELECT * from {self.table_name}')
-        while row := cursor.fetchone():
-            yield dict(zip(row.keys(), row))
-        conn.close()
+        with sqlite3.connect(f'{self.database_name}') as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute(f'SELECT * from {self.table_name}')
+            while row := cursor.fetchone():
+                yield dict(zip(row.keys(), row))
 
     def __contains__(self, item: str):
         return bool(self.__getitem__(item))
@@ -64,43 +63,3 @@ class TableData:
             return dict(zip(row.keys(), row))
         except AttributeError:
             return None
-
-
-
-conn = sqlite3.connect('example.sqlite')
-cursor = conn.cursor()
-
-cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-print(cursor.fetchall())
-
-cursor.execute("SELECT sql FROM sqlite_master WHERE tbl_name = 'presidents' AND type = 'table';")
-print(cursor.fetchall())
-
-cursor.execute("SELECT sql FROM sqlite_master WHERE tbl_name = 'books' AND type = 'table';")
-print(cursor.fetchall())
-print()
-
-
-cursor.execute('SELECT * from books')
-data = cursor.fetchall()   # will be a list with data.
-print(data)
-
-cursor.execute('SELECT * from presidents')
-data = cursor.fetchall()   # will be a list with data.
-print(data)
-print()
-
-presidents_td = TableData('example.sqlite', 'presidents')
-books_td = TableData('example.sqlite', 'books')
-
-print(presidents_td)
-print(books_td)
-print()
-print(len(presidents_td), len(books_td))
-
-print('Yeltsin' in presidents_td)
-
-print(books_td['1984'])
-
-for book in books_td:
-    print(book['name'])
