@@ -1,5 +1,4 @@
 import os.path
-
 import sqlite3
 
 from homeworks.homework8.task2 import TableData
