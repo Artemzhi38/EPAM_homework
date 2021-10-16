@@ -1,4 +1,5 @@
 import os.path
+
 import sqlite3
 
 from homeworks.homework8.task2 import TableData
@@ -48,7 +49,7 @@ def test_receiving_most_recent_data_from_database():
      instance, all calls should return updated data"""
     path = os.path.join(os.path.dirname(__file__), 'example.sqlite')
     presidents = TableData(path, 'presidents')
-    with sqlite3.connect('example.sqlite') as conn:
+    with sqlite3.connect(path) as conn:
         cursor = conn.cursor()
         cursor.execute("INSERT INTO presidents VALUES ('Stalin', 1953,'USSR')")
     assert len(presidents) == 4
@@ -59,6 +60,6 @@ def test_receiving_most_recent_data_from_database():
     for president in presidents:
         list_of_names.append(president['name'])
     assert len(list_of_names) == len(presidents)
-    with sqlite3.connect('example.sqlite') as conn:
+    with sqlite3.connect(path) as conn:
         cursor = conn.cursor()
         cursor.execute("DELETE FROM presidents WHERE name = 'Stalin'")
