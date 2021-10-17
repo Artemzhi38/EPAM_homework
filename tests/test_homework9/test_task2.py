@@ -1,4 +1,5 @@
 import pytest
+
 from homeworks.homework9.task2 import SupressorCls, supressor_gen
 
 
