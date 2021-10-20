@@ -2,6 +2,7 @@ import ast
 import os
 
 import pytest
+
 import requests
 
 from bs4 import BeautifulSoup
