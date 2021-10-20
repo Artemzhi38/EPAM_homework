@@ -2,6 +2,7 @@ import ast
 import os
 
 import pytest
+
 import requests
 from bs4 import BeautifulSoup
 from homeworks.homework10.task1 import (all_companies, company_code,
