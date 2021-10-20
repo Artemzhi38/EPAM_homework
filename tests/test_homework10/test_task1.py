@@ -2,8 +2,8 @@ import ast
 import os
 
 import pytest
-from requests import get
 from bs4 import BeautifulSoup
+from requests import get
 
 from homeworks.homework10.task1 import (all_companies, company_code,
                                         company_name, fill_company, pe_ratio,
@@ -12,6 +12,7 @@ from homeworks.homework10.task1 import (all_companies, company_code,
                                         top_highest_potential_profit,
                                         top_highest_price, top_lowest_pe,
                                         tops_to_json, usd_cb_course)
+
 
 
 @pytest.fixture()
