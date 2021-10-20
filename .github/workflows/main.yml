@@ -18,6 +18,6 @@ jobs:
           pip install flake8 isort pytest
           ls -la
           flake8 .
-          isort .
+          isort --check.
           py.test tests
           

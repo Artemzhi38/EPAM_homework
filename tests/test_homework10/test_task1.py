@@ -1,8 +1,10 @@
 import ast
 import os
+
 import pytest
 from requests import get
 from bs4 import BeautifulSoup
+
 from homeworks.homework10.task1 import (all_companies, company_code,
                                         company_name, fill_company, pe_ratio,
                                         percent_profit, price_in_rubles,
