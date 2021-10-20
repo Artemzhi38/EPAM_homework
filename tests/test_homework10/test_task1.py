@@ -1,7 +1,7 @@
 import ast
 import os
 import pytest
-import requests
+from requests import get
 from bs4 import BeautifulSoup
 from homeworks.homework10.task1 import (all_companies, company_code,
                                         company_name, fill_company, pe_ratio,
@@ -63,7 +63,7 @@ def dict_list_fixture():
 
 def test_percent_profit():
     mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = requests.get(mmm_url).text
+    mmm_page_text = get(mmm_url).text
     mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
     try:
         week_low = mmm_soup.find(
@@ -89,21 +89,21 @@ def test_usd_cb_course():
 
 def test_company_code():
     mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = requests.get(mmm_url).text
+    mmm_page_text = get(mmm_url).text
     mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
     assert company_code(mmm_soup) == 'MMM'
 
 
 def test_company_name():
     mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = requests.get(mmm_url).text
+    mmm_page_text = get(mmm_url).text
     mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
     assert company_name(mmm_soup) == '3M Co.'
 
 
 def test_pe_ratio():
     mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = requests.get(mmm_url).text
+    mmm_page_text = get(mmm_url).text
     mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
     try:
         res = float(mmm_soup.find(
@@ -116,7 +116,7 @@ def test_pe_ratio():
 
 def test_price_in_rubles():
     mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = requests.get(mmm_url).text
+    mmm_page_text = get(mmm_url).text
     mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
     res = round(1*float(mmm_soup.find("span",
                                       class_="price-section__current-value"
@@ -233,7 +233,7 @@ async def test_all_companies():
                 and tag.has_attr('href')
                 and tag.has_attr('title')
                 and not tag.has_attr('class'))
-    page_text = requests.get(url).text
+    page_text = get(url).text
     page_soup = BeautifulSoup(page_text, 'html.parser')
     reference = page_soup.findAll(companies_on_page)
     result = await all_companies(url)
