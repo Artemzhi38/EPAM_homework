@@ -16,6 +16,7 @@ jobs:
       - name: Run script
         run: |
           pip install flake8 isort pytest
+          pip install requirements.txt
           ls -la
           flake8 .
           isort --check .
