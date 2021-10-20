@@ -14,7 +14,6 @@ from homeworks.homework10.task1 import (all_companies, company_code,
                                         tops_to_json, usd_cb_course)
 
 
-
 @pytest.fixture()
 def dict_list_fixture():
     di = [
