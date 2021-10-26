@@ -23,6 +23,7 @@ def db_session_fixture():
 
 def test_add_some_records(db_session_fixture):
     session = db_session_fixture
+
     # DB commit
     web_teacher = Teacher('Ivanov', 'Ivan')
     session.add(web_teacher)
@@ -35,6 +36,7 @@ def test_add_some_records(db_session_fixture):
         web_homework, 'Web homework done!', good_student)
     session.add(good_student_web_result)
     session.commit()
+
     # checking comitted changes
     res = session.query(Teacher).order_by(Teacher.id)
     assert res[1].id == 2
