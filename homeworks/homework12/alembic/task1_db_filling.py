@@ -3,6 +3,7 @@ import os
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 from task1_db_creation import Homework, HomeworkResult, Student, Teacher
 
 path_to_db = os.path.join(os.path.abspath(
