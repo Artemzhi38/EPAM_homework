@@ -7,10 +7,9 @@ Create Date: 2021-10-26 14:35:31.678216
 """
 import datetime
 
+from alembic import op
 from sqlalchemy import Integer, Interval, String
 from sqlalchemy.sql import column, table
-
-from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = 'd5ea9f4551af'
