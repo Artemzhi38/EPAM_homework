@@ -17,8 +17,11 @@ Utilize ORM capabilities as much as possible, avoiding executing raw SQL
 queries."""
 
 import datetime
+import os
 from collections import defaultdict
-from sqlalchemy import Column, Integer, String, Interval, ForeignKey, create_engine
+
+from sqlalchemy import (Column, ForeignKey, Integer, Interval, String,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -33,8 +36,9 @@ class DeadlineError(Exception):
     pass
 
 
-engine = create_engine('sqlite:///main.db', echo=True)
-
+path_to_db = os.path.join(os.path.abspath(
+    os.path.dirname(os.path.dirname(__file__))), 'main.db')
+engine = create_engine('sqlite:///'+path_to_db, echo=True)
 Base = declarative_base()
 
 
@@ -112,7 +116,3 @@ class Teacher(Person, Base):
     @staticmethod
     def create_homework(text: str, days: int) -> Homework:
         return Homework(text, datetime.timedelta(days=days))
-
-
-# Создание таблицы
-Base.metadata.create_all(engine)
