@@ -22,6 +22,7 @@ an attribute (for example when there's a line 1=something)
 ValueError should be raised. File size is expected to be
 small, you are permitted to read it entirely into memory."""
 import re
+import keyword
 
 
 class KeyValueStorage(dict):
@@ -32,15 +33,15 @@ class KeyValueStorage(dict):
         with open(path_to_file) as file:
             for line in file:
                 key, value = line.strip().split("=")
-                if not re.match(r"^[a-zA-Z_][\w]*$", key):
-                    raise ValueError
-                try:
+                if (not re.match(r"^[a-zA-Z_][\w]*$", key)
+                        or keyword.iskeyword(key)):
+                    raise ValueError(f"value {key} cannot be"
+                                     f" assigned to an attribute")
+                if re.match(r"^\d+$", value):
                     value = int(value)
-                except ValueError:
-                    pass
-                dictionary[key] = value
                 try:
                     getattr(self, key)
                 except AttributeError:
+                    dictionary[key] = value
                     self.__dict__[key] = value
         super().__init__(self, **dictionary)

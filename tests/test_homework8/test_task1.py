@@ -56,6 +56,14 @@ def worst_string_fixture():
         return path
 
 
+@pytest.fixture()
+def builtin_key_fixture():
+    path = os.path.join(os.path.dirname(__file__), 'task1.txt')
+    with open(path, 'w') as test_file:
+        test_file.writelines(["def=100"])
+        return path
+
+
 def test_int_values(int_values_fixture):
     """Testing that if a value can be treated both as a number
      and a string, it is treated as number"""
@@ -107,3 +115,11 @@ def test_non_ascii_symbols_value_cannot_be_assigned(worst_string_fixture):
      an attribute ValueError should is raised."""
     with pytest.raises(ValueError):
         KeyValueStorage(worst_string_fixture)
+
+
+def test_builtin_value_cannot_be_assigned(builtin_key_fixture):
+    """Testing that in case when value cannot be assigned to
+     an attribute ValueError should is raised."""
+    with pytest.raises(ValueError, match="value def cannot be "
+                                         "assigned to an attribute"):
+        KeyValueStorage(builtin_key_fixture)

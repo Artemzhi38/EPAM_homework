@@ -36,18 +36,20 @@ class TableData:
         self.table_name = table_name
 
     def __len__(self):
-        len_count = 0
-        for i in self.__iter__():
-            len_count += 1
-        return len_count
+        with sqlite3.connect(f'{self.database_name}') as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute(f'SELECT * from {self.table_name}')
+            rows = cursor.fetchall()
+        return len(rows)
 
     def __iter__(self):
         with sqlite3.connect(f'{self.database_name}') as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             cursor.execute(f'SELECT * from {self.table_name}')
-            while row := cursor.fetchone():
-                yield dict(zip(row.keys(), row))
+            rows = cursor.fetchall()
+        return TableDataIter(rows)
 
     def __contains__(self, item: str):
         return bool(self.__getitem__(item))
@@ -59,7 +61,22 @@ class TableData:
         cursor.execute(f'SELECT * from {self.table_name} where name="{item}"')
         row = cursor.fetchone()
         conn.close()
-        try:
-            return dict(zip(row.keys(), row))
-        except AttributeError:
-            return None
+        return dict(zip(row.keys(), row)) if row else None
+
+
+class TableDataIter:
+    def __init__(self, tabledata: list):
+        self.tabledata = tabledata
+        self._cursor = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._cursor < len(self.tabledata):
+            row = self.tabledata[self._cursor]
+            print(row)
+            result = dict(zip(row.keys(), row))
+            self._cursor += 1
+            return result
+        raise StopIteration
