@@ -21,8 +21,8 @@ take precedence. In case when value cannot be assigned to
 an attribute (for example when there's a line 1=something)
 ValueError should be raised. File size is expected to be
 small, you are permitted to read it entirely into memory."""
-import re
 import keyword
+import re
 
 
 class KeyValueStorage(dict):
