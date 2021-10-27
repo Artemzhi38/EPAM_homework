@@ -15,19 +15,10 @@ Examples:
 """
 import re
 
-from collections import defaultdict
-
 
 def backspace_compare(first: str, second: str):
-    result = defaultdict(list)
-
-    for string in first, second:
-        for char in string:
-            result[string].append(char) if char != '#' \
-                else result[string].pop() if len(result[string]) > 0 else 0
-
-    return result[first] == result[second]
-
-
-'''def backspace_compare_regex(first: str, second: str):
-    return re.sub('#', '\b', first) == re.sub('#', '\b', second)'''
+    for i in re.findall(r"#+", first):
+        first = re.sub('[^#]{,'+'{0}'.format(len(i))+'}'+i, "", first)
+    for i in re.findall(r"#+", second):
+        second = re.sub('[^#]{,'+'{0}'.format(len(i))+'}'+i, "", second)
+    return first == second

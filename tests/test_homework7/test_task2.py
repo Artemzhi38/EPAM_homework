@@ -6,7 +6,8 @@ from homeworks.homework7.task2 import backspace_compare
 # positive tests
 @pytest.mark.parametrize("test_input", [("ab#c", "ad#c"), ("a##c", "#a#c"),
                                         ("#####", "#"), ("a#b##c###", "#"),
-                                        ("""abc012#####c#c""", "###ac"), ("abc", "abc")])
+                                        ("""abc012#####c#c""", "###ac"),
+                                        ("abc", "abc")])
 def test_default_examples(test_input):
     """Testing that function returns True in cases of:
     - default examples

@@ -42,7 +42,7 @@ def test_tree_is_empty_dict():
 
 
 def test_tree_is_not_a_dict():
-    """Testing that function raises AttributeError if given not a dict as a tree"""
+    """Testing that function raises AttributeError
+    if given not a dict as a tree"""
     with pytest.raises(AttributeError):
         find_occurrences({'red', 'red', 'red'}, "red")
-
