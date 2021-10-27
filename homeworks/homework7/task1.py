@@ -32,24 +32,23 @@ def find_occurrences(tree: dict, element: Any) -> int:
     for key, value in tree.items():
 
         # key is str/int/bool case
-        counter += 1 if key == element and isinstance(key, type(element)) else 0
+        counter += (1 if key == element and
+                    isinstance(key, type(element)) else 0)
         # key is tuple case
         counter += key.count(element) if isinstance(key, tuple) else 0
 
         # value is str/int/bool case
-        counter += 1 if value == element and isinstance(value, type(element)) else 0
+        counter += (1 if value == element
+                    and isinstance(value, type(element)) else 0)
         # value is dict case
-        counter += find_occurrences(value, element) if isinstance(value, dict) else 0
-        # value is set case
-        counter += find_occurrences(dict.fromkeys(value), element) if isinstance(value, set) else 0
+        counter += (find_occurrences(value, element)
+                    if isinstance(value, dict) else 0)
+        # value is set/list/tuple case
+        counter += (find_occurrences(dict(enumerate(value)), element)
+                    if isinstance(value, (set, list, tuple)) and
+                    not isinstance(element, int) else
+                    find_occurrences(dict(enumerate(value), start=element+1),
+                                     element)
+                    if isinstance(value, (set, list, tuple)) else 0)
 
-        # value is list/tuple case
-        if isinstance(value, (list, tuple)):
-            for item in value:
-                # item is str/int/bool case
-                counter += 1 if item == element and isinstance(item, type(element)) else 0
-                # item is dict case
-                counter += find_occurrences(item, element) if isinstance(item, dict) else 0
-                # item is set case
-                counter += find_occurrences(dict.fromkeys(item), element) if isinstance(item, set) else 0
     return counter

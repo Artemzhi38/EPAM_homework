@@ -31,7 +31,8 @@ def tic_tac_toe_checker(board: List[List]) -> str:
         if [char for line in board if line.count(char) == 3]:
             return f"{char} wins!"
         # vertical winner
-        if [char for line in range(3) if [board[row][line] for row in range(3)].count(char) == 3]:
+        if [char for line in range(3)
+           if [board[row][line] for row in range(3)].count(char) == 3]:
             return f"{char} wins!"
         # diagonal winner
         if ([board[row][line] for line, row

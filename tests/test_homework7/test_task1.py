@@ -18,7 +18,9 @@ def test_expanded_default_example():
     example_tree["third"][True] = True
     example_tree["third"]["complex_key"][True] = True
     example_tree["third"]["complex_key"]["key3"][4][True] = True
-    assert find_occurrences(example_tree, True) == 10
+    example_tree["fifth"] = {2: 2, 3: 3, True: True}
+    example_tree["sixth"] = [1, 2, 3, [True, 2, 3]]
+    assert find_occurrences(example_tree, True) == 13
 
 
 def test_counting_tuple_element():
