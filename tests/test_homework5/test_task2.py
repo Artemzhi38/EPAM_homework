@@ -43,4 +43,4 @@ def test_original_function_is_callable():
     decorated function with 'function.__original_func' command"""
     original_custom_sum = custom_sum
     decorated_custom_sum = print_result(custom_sum)
-    assert decorated_custom_sum.__original_func == original_custom_sum
+    assert decorated_custom_sum.__original_func is original_custom_sum
