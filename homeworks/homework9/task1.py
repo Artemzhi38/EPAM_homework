@@ -36,28 +36,18 @@ class OneFromEach:
                 self.values[pos] = next(self.generators[pos], "None")
 
     def __iter__(self):
-        return OneFromEachIter(self)
-
-
-class OneFromEachIter:
-    def __init__(self, one_from_each: OneFromEach):
-        one_from_each.refresh_values()
-        self.one_from_each = one_from_each
-        self.values = one_from_each.values
-
-    def __iter__(self):
         return self
 
     def __next__(self):
-        self.one_from_each.refresh_values()
+        self.refresh_values()
         if self.values.count("None") < len(self.values):
             int_values = []
             for value in self.values:
                 if isinstance(value, int):
                     int_values.append(value)
             result = min(int_values)
-            self.one_from_each.values[
-                self.one_from_each.values.index(result)
+            self.values[
+                self.values.index(result)
             ] = "None"
             return result
         raise StopIteration

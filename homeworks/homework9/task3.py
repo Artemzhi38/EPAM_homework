@@ -15,10 +15,10 @@ from typing import Callable, Optional
 
 def universal_file_counter(dir_path: Path, file_extension: str,
                            tokenizer: Optional[Callable] = None) -> int:
+
     result = 0
-    for path in Path(dir_path).glob("*"+file_extension):
+    for path in Path(dir_path).glob("*."+file_extension):
         with open(path) as file:
             for line in file:
-                result += (1 if tokenizer is None
-                           else len(list(tokenizer(line))))
+                result += (1 if not tokenizer else len(list(tokenizer(line))))
     return result
