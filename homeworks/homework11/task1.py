@@ -24,9 +24,9 @@ assert SizesEnum.XL == "XL"
 
 
 class SimplifiedEnum(type):
-    def __new__(mcs, name, bases, dct):
+    def __new__(cls, name, bases, dct):
         if "_"+name+"__keys" in dct.keys():
             for key in dct["_"+name+"__keys"]:
                 dct[key] = key
-        cls_instance = super().__new__(mcs, name, bases, dct)
+        cls_instance = super().__new__(cls, name, bases, dct)
         return cls_instance
