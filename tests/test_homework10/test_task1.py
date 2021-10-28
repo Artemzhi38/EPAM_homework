@@ -1,12 +1,10 @@
 import ast
 import os
-from aiohttp.client_reqrep import ClientResponse
+
 import pytest
 from bs4 import BeautifulSoup
-import pytest
 
-from homeworks.homework10.task1 import (all_companies, company_code,
-                                        company_name, fill_company, pe_ratio,
+from homeworks.homework10.task1 import (company_code, company_name, pe_ratio,
                                         percent_profit, price_in_rubles,
                                         top_highest_growth,
                                         top_highest_potential_profit,
@@ -229,37 +227,3 @@ def test_tops_to_json(dict_list_fixture):
             assert isinstance(result[0], dict)
             assert result[0].keys() == dictionary_example.keys()
         os.remove(file)
-
-
-'''@pytest.mark.asyncio
-async def test_all_companies(monkeypatch):
-    url = 'https://markets.businessinsider.com/index/components/s&p_500?p=1'
-
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                        'index_page.html')
-    with open(path) as company:
-        companies_soup = BeautifulSoup(company, 'html.parser')
-
-    def companies_on_page(tag):
-        return (tag.name == "a"
-                and tag.has_attr('href')
-                and tag.has_attr('title')
-                and not tag.has_attr('class'))
-
-    reference = companies_soup.findAll(companies_on_page)
-
-    monkeypatch.setattr(all_companies(url), 'companies_on_page', companies_soup)
-
-    result = await all_companies(url)
-    assert result == reference
-
-
-@pytest.mark.asyncio
-async def test_fill_company():
-    dictionary_example = {'code': 0, 'name': 0, 'price': 0, 'P/E': 0,
-                          'growth': 0, 'potential profit': 0}
-    url = 'https://markets.businessinsider.com/index/components/s&p_500?p=1'
-    companies = await all_companies(url)
-    result = await fill_company(companies[0], usd_cb_course())
-    assert isinstance(result, dict)
-    assert result.keys() == dictionary_example.keys()'''
