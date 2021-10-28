@@ -221,5 +221,20 @@ def main():
     tops_to_json(companies_dicts_list)
 
 
-if __name__ == '__main__':
-    main()
+'''if __name__ == '__main__':
+    main()'''
+
+url = 'https://markets.businessinsider.com/index/components/s&p_500?p=1'
+
+
+def companies_on_page(tag):
+    return (tag.name == "a"
+            and tag.has_attr('href')
+            and tag.has_attr('title')
+            and not tag.has_attr('class'))
+
+
+page_text = requests.get(url).text
+page_soup = BeautifulSoup(page_text, 'html.parser')
+reference = page_soup.findAll(companies_on_page)
+print(reference)

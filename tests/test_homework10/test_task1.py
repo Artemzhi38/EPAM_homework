@@ -1,9 +1,9 @@
 import ast
 import os
-
+from aiohttp.client_reqrep import ClientResponse
 import pytest
 from bs4 import BeautifulSoup
-from requests import get
+import pytest
 
 from homeworks.homework10.task1 import (all_companies, company_code,
                                         company_name, fill_company, pe_ratio,
@@ -64,9 +64,10 @@ def dict_list_fixture():
 
 
 def test_percent_profit():
-    mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = get(mmm_url).text
-    mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                        'company_page.html')
+    with open(path) as company:
+        mmm_soup = BeautifulSoup(company, 'html.parser')
     try:
         week_low = mmm_soup.find(
             "div", class_="snapshot__header",
@@ -90,23 +91,26 @@ def test_usd_cb_course():
 
 
 def test_company_code():
-    mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = get(mmm_url).text
-    mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                        'company_page.html')
+    with open(path) as company:
+        mmm_soup = BeautifulSoup(company, 'html.parser')
     assert company_code(mmm_soup) == 'MMM'
 
 
 def test_company_name():
-    mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = get(mmm_url).text
-    mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                        'company_page.html')
+    with open(path) as company:
+        mmm_soup = BeautifulSoup(company, 'html.parser')
     assert company_name(mmm_soup) == '3M Co.'
 
 
 def test_pe_ratio():
-    mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = get(mmm_url).text
-    mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                        'company_page.html')
+    with open(path) as company:
+        mmm_soup = BeautifulSoup(company, 'html.parser')
     try:
         res = float(mmm_soup.find(
             "div", class_="snapshot__header", string="P/E Ratio"
@@ -117,9 +121,10 @@ def test_pe_ratio():
 
 
 def test_price_in_rubles():
-    mmm_url = 'https://markets.businessinsider.com/stocks/mmm-stock'
-    mmm_page_text = get(mmm_url).text
-    mmm_soup = BeautifulSoup(mmm_page_text, 'html.parser')
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                        'company_page.html')
+    with open(path) as company:
+        mmm_soup = BeautifulSoup(company, 'html.parser')
     res = round(1*float(mmm_soup.find("span",
                                       class_="price-section__current-value"
                                       ).string.replace(',', '')), 2)
@@ -226,18 +231,25 @@ def test_tops_to_json(dict_list_fixture):
         os.remove(file)
 
 
-@pytest.mark.asyncio
-async def test_all_companies():
+'''@pytest.mark.asyncio
+async def test_all_companies(monkeypatch):
     url = 'https://markets.businessinsider.com/index/components/s&p_500?p=1'
+
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                        'index_page.html')
+    with open(path) as company:
+        companies_soup = BeautifulSoup(company, 'html.parser')
 
     def companies_on_page(tag):
         return (tag.name == "a"
                 and tag.has_attr('href')
                 and tag.has_attr('title')
                 and not tag.has_attr('class'))
-    page_text = get(url).text
-    page_soup = BeautifulSoup(page_text, 'html.parser')
-    reference = page_soup.findAll(companies_on_page)
+
+    reference = companies_soup.findAll(companies_on_page)
+
+    monkeypatch.setattr(all_companies(url), 'companies_on_page', companies_soup)
+
     result = await all_companies(url)
     assert result == reference
 
@@ -250,4 +262,4 @@ async def test_fill_company():
     companies = await all_companies(url)
     result = await fill_company(companies[0], usd_cb_course())
     assert isinstance(result, dict)
-    assert result.keys() == dictionary_example.keys()
+    assert result.keys() == dictionary_example.keys()'''
