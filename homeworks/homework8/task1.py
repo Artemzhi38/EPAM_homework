@@ -29,7 +29,6 @@ class KeyValueStorage(dict):
     """wrapper class for key and value storage"""
     def __init__(self, path_to_file: str):
         self.path_to_file = path_to_file
-        attrs = self.__dict__
         dictionary = {}
         with open(path_to_file) as file:
             for line in file:
