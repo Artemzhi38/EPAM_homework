@@ -33,6 +33,14 @@ def builtin_attributes_fixture():
 
 
 @pytest.fixture()
+def name_duplication():
+    path = os.path.join(os.path.dirname(__file__), 'task1.txt')
+    with open(path, 'w') as test_file:
+        test_file.writelines(["name=attr1\n", "name=attr2\n"])
+        return path
+
+
+@pytest.fixture()
 def bad_string_fixture():
     path = os.path.join(os.path.dirname(__file__), 'task1.txt')
     with open(path, 'w') as test_file:
@@ -93,7 +101,14 @@ def test_builtin_attributes_have_priority(builtin_attributes_fixture):
     assert not storage.__class__ == "attr1"
     assert not storage.__dict__ == "attr2"
     assert not storage.__doc__ == "attr3"
-    assert not storage.__module__ == "attr4"
+    assert not storage.__iter__ == "attr4"
+
+
+def test_name_duplication(name_duplication):
+    """Testing that in case of duplication of keys in file
+    value of the last one will be applied"""
+    storage = KeyValueStorage(name_duplication)
+    assert storage.name == "attr2"
 
 
 def test_value_starts_with_digit_cannot_be_assigned(bad_string_fixture):

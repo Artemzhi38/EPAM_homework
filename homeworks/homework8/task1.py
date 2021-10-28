@@ -29,6 +29,7 @@ class KeyValueStorage(dict):
     """wrapper class for key and value storage"""
     def __init__(self, path_to_file: str):
         self.path_to_file = path_to_file
+        attrs = self.__dict__
         dictionary = {}
         with open(path_to_file) as file:
             for line in file:
@@ -37,11 +38,9 @@ class KeyValueStorage(dict):
                         or keyword.iskeyword(key)):
                     raise ValueError(f"value {key} cannot be"
                                      f" assigned to an attribute")
-                if re.match(r"^\d+$", value):
+                if value.isdigit():
                     value = int(value)
-                try:
-                    getattr(self, key)
-                except AttributeError:
+                if key not in dict.__dict__ and key != "path_to_file":
                     dictionary[key] = value
                     self.__dict__[key] = value
         super().__init__(self, **dictionary)

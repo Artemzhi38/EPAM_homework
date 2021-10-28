@@ -39,17 +39,26 @@ class TableData:
         with sqlite3.connect(f'{self.database_name}') as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute(f'SELECT * from {self.table_name}')
-            rows = cursor.fetchall()
-        return len(rows)
+            cursor.execute(f'SELECT COUNT(*) from {self.table_name}')
+        return cursor.fetchone()[0]
 
     def __iter__(self):
         with sqlite3.connect(f'{self.database_name}') as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             cursor.execute(f'SELECT * from {self.table_name}')
-            rows = cursor.fetchall()
-        return TableDataIter(rows)
+            self.tabledata = cursor.fetchall()
+            self._cursor = 0
+        return self
+
+    def __next__(self):
+        if self._cursor < len(self.tabledata):
+            row = self.tabledata[self._cursor]
+            print(row)
+            result = dict(zip(row.keys(), row))
+            self._cursor += 1
+            return result
+        raise StopIteration
 
     def __contains__(self, item: str):
         return bool(self.__getitem__(item))
@@ -62,21 +71,3 @@ class TableData:
         row = cursor.fetchone()
         conn.close()
         return dict(zip(row.keys(), row)) if row else None
-
-
-class TableDataIter:
-    def __init__(self, tabledata: list):
-        self.tabledata = tabledata
-        self._cursor = 0
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self._cursor < len(self.tabledata):
-            row = self.tabledata[self._cursor]
-            print(row)
-            result = dict(zip(row.keys(), row))
-            self._cursor += 1
-            return result
-        raise StopIteration
