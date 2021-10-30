@@ -2,12 +2,12 @@ import datetime
 import os
 
 import pytest
-from sqlalchemy import create_engine, Table
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from homeworks.homework12.alembic.task1_db_creation import (Homework,
                                                             HomeworkResult,
-                                                            Student, Teacher, Base)
+                                                            Student, Teacher)
 
 
 @pytest.fixture

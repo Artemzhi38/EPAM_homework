@@ -22,7 +22,6 @@ from sqlalchemy import (Column, ForeignKey, Integer, Interval, String,
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-
 path_to_db = os.path.join(os.path.abspath(
     os.path.dirname(os.path.dirname(__file__))), 'main.db')
 engine = create_engine('sqlite:///'+path_to_db, echo=True)
