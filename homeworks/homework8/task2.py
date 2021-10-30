@@ -47,16 +47,14 @@ class TableData:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             cursor.execute(f'SELECT * from {self.table_name}')
-            self.tabledata = cursor.fetchall()
-            self._cursor = 0
+            self.tabledata = cursor
         return self
 
     def __next__(self):
-        if self._cursor < len(self.tabledata):
-            row = self.tabledata[self._cursor]
+        row = self.tabledata.fetchone()
+        while row:
             print(row)
             result = dict(zip(row.keys(), row))
-            self._cursor += 1
             return result
         raise StopIteration
 
