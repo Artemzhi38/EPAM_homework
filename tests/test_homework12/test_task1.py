@@ -24,24 +24,17 @@ def db_session_fixture():
 def test_add_some_records(db_session_fixture):
     session = db_session_fixture
     # DB commit
-
-    web_teacher = Teacher()
-    web_teacher.last_name = 'Ivanov'
-    web_teacher.first_name = 'Ivan'
+    web_teacher = Teacher(last_name='Ivanov', first_name='Ivan')
     session.add(web_teacher)
-    good_student = Student()
-    good_student.last_name = 'Petrov'
-    good_student.first_name = 'Petr'
+    good_student = Student(last_name='Petrov', first_name='Petr')
     session.add(good_student)
-    web_homework = Homework()
-    web_homework.text = 'do web homework'
-    web_homework.deadline = datetime.timedelta(days=5.0)
+    web_homework = Homework(text='do web homework',
+                            deadline=datetime.timedelta(days=5.0))
     session.add(web_homework)
     session.flush()
-    good_student_web_result = HomeworkResult()
-    good_student_web_result.homework_id = web_homework.id
-    good_student_web_result.solution = 'Web homework done!'
-    good_student_web_result.author_id = good_student.id
+    good_student_web_result = HomeworkResult(homework_id=web_homework.id,
+                                             solution='Web homework done!',
+                                             author_id=good_student.id)
     session.add(good_student_web_result)
     session.commit()
 

@@ -28,6 +28,13 @@ engine = create_engine('sqlite:///'+path_to_db, echo=True)
 Base = declarative_base()
 
 
+class Teacher(Base):
+    __tablename__ = 'teachers'
+    id = Column(Integer, primary_key=True)
+    last_name = Column(String)
+    first_name = Column(String)
+
+
 class HomeworkResult(Base):
     __tablename__ = 'results'
     id = Column(Integer, primary_key=True)
@@ -52,10 +59,3 @@ class Student(Base):
     last_name = Column(String)
     first_name = Column(String)
     st = relationship("HomeworkResult", back_populates="hr_st")
-
-
-class Teacher(Base):
-    __tablename__ = 'teachers'
-    id = Column(Integer, primary_key=True)
-    last_name = Column(String)
-    first_name = Column(String)
