@@ -20,17 +20,17 @@ def instances_counter(cls):
         nonlocal instance variable value"""
         original_init(self, *args, **kwargs)
         cls.instance += 1
-        setattr(self, 'get_created_instances', get_created_instances)
-        setattr(self, 'reset_instances_counter', reset_instances_counter)
 
-    def get_created_instances():
+    @classmethod
+    def get_created_instances(obj=cls):
         """возвращает количество созданых экземпляров класса"""
-        return cls.instance
+        return obj.instance
 
-    def reset_instances_counter():
+    @classmethod
+    def reset_instances_counter(obj=cls):
         """сбрасывает счетчик экземпляров, возвращает значение до сброса"""
-        value_before_reset = cls.instance
-        cls.instance = 0
+        value_before_reset = obj.instance
+        obj.instance = 0
         return value_before_reset
 
     cls.__init__ = __custom_init__
