@@ -2,12 +2,12 @@ import datetime
 import os
 
 import pytest
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, Table
 from sqlalchemy.orm import sessionmaker
 
 from homeworks.homework12.alembic.task1_db_creation import (Homework,
                                                             HomeworkResult,
-                                                            Student, Teacher)
+                                                            Student, Teacher, Base)
 
 
 @pytest.fixture
@@ -23,17 +23,25 @@ def db_session_fixture():
 
 def test_add_some_records(db_session_fixture):
     session = db_session_fixture
-
     # DB commit
-    web_teacher = Teacher('Ivanov', 'Ivan')
+
+    web_teacher = Teacher()
+    web_teacher.last_name = 'Ivanov'
+    web_teacher.first_name = 'Ivan'
     session.add(web_teacher)
-    good_student = Student('Petrov', 'Petr')
+    good_student = Student()
+    good_student.last_name = 'Petrov'
+    good_student.first_name = 'Petr'
     session.add(good_student)
-    web_homework = Homework('do web homework', datetime.timedelta(days=5.0))
+    web_homework = Homework()
+    web_homework.text = 'do web homework'
+    web_homework.deadline = datetime.timedelta(days=5.0)
     session.add(web_homework)
     session.flush()
-    good_student_web_result = HomeworkResult(
-        web_homework, 'Web homework done!', good_student)
+    good_student_web_result = HomeworkResult()
+    good_student_web_result.homework_id = web_homework.id
+    good_student_web_result.solution = 'Web homework done!'
+    good_student_web_result.author_id = good_student.id
     session.add(good_student_web_result)
     session.commit()
 
