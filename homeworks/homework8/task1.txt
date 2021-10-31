@@ -1,0 +1,4 @@
+__name__=attr1
+__dict__=attr2
+__doc__=attr3
+__module__=attr4

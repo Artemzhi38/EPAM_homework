@@ -1,0 +1,82 @@
+[
+    {
+        "code": "VNO",
+        "name": "Vornado Realty Trust",
+        "price": 3252.42,
+        "P/E": -893.45,
+        "growth": 33.28,
+        "potential profit": 70.81
+    },
+    {
+        "code": "CVX",
+        "name": "Chevron Corp.",
+        "price": 7977.2,
+        "P/E": -427.45,
+        "growth": 50.36,
+        "potential profit": 73.55
+    },
+    {
+        "code": "DVN",
+        "name": "Devon Energy Corp.",
+        "price": 2880.06,
+        "P/E": -167.13,
+        "growth": 345.67,
+        "potential profit": 442.25
+    },
+    {
+        "code": "XOM",
+        "name": "ExxonMobil Corp. (Exxon Mobil)",
+        "price": 4511.6,
+        "P/E": -125.36,
+        "growth": 86.01,
+        "potential profit": 108.68
+    },
+    {
+        "code": "PSX",
+        "name": "Phillips 66",
+        "price": 5870.27,
+        "P/E": -76.53,
+        "growth": 59.68,
+        "potential profit": 117.88
+    },
+    {
+        "code": "UAA",
+        "name": "Under Armour Inc.",
+        "price": 1447.49,
+        "P/E": -64.5,
+        "growth": 65.07,
+        "potential profit": 101.45
+    },
+    {
+        "code": "INCY",
+        "name": "Incyte Corp.",
+        "price": 4667.22,
+        "P/E": -63.09,
+        "growth": -27.66,
+        "potential profit": 58.35
+    },
+    {
+        "code": "TWTR",
+        "name": "Twitter",
+        "price": 4684.28,
+        "P/E": -62.1,
+        "growth": 41.08,
+        "potential profit": 107.4
+    },
+    {
+        "code": "MRNA",
+        "name": "Moderna Inc",
+        "price": 23546.44,
+        "P/E": -59.95,
+        "growth": 338.48,
+        "potential profit": 659.15
+    },
+    {
+        "code": "UA",
+        "name": "Under Armour Inc When Issued",
+        "price": 1268.42,
+        "P/E": -55.67,
+        "growth": 76.67,
+        "potential profit": 92.44
+    }
+]
